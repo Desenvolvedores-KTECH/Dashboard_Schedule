@@ -1,0 +1,20 @@
+class Ivr:
+    def __init__(self, objeto):
+        self.id = objeto.get('id')
+        self.name = objeto.get('name')
+        self.division_id = objeto.get('division').get('id')
+        self.division_name = objeto.get('division').get('name')
+        self.date_created = objeto.get('dateCreated')
+        self.date_modified = objeto.get('dateModified')
+        self.created_by = objeto.get('createdBy')
+        self.modified_by = objeto.get('modifiedBy')
+        self.state = objeto.get('state')
+        self.dnis = objeto.get('dnis')
+        self.flow_id  = objeto.get('flowId')
+        self.open_hours_flow_id = objeto.get('openHoursFlow').get('id')
+        self.open_hours_flow_name = objeto.get('openHoursFlow').get('name')
+        self.closed_hours_flow_id = objeto.get('closedHoursFlow').get('id')
+        self.closed_hours_flow_name = objeto.get('closedHoursFlow').get('name')
+        self.schedule_group_id = objeto.get('scheduleGroup').get('id')
+        self.schedule_group_name = objeto.get('scheduleGroup').get('name')
+        
