@@ -13,3 +13,6 @@ class ScheduleGroup:
     
     def __str__(self):
         return f'Name: {self.name} - State: {self.state}'
+    
+    def __eq__(self, schedule_group_id, schedule_group_name):
+        return self.id == schedule_group_id and self.name == schedule_group_name

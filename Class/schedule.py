@@ -1,5 +1,6 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from .User import User
+import re
 
 class Schedule:
     def __init__(self, objeto):
@@ -26,10 +27,14 @@ class Schedule:
         return self.id == schedule_id and self.name == schedule_name
     
     def format_date(self):
-        self.date_created = datetime.strptime(self.date_created[:-5], '%Y-%m-%dT%H:%M:%S')
-        self.date_modified = datetime.strptime(self.date_modified[:-5], '%Y-%m-%dT%H:%M:%S')
-        self.start = datetime.strptime(self.start[:-5], '%Y-%m-%dT%H:%M:%S')
-        self.end = datetime.strptime(self.end[:-5], '%Y-%m-%dT%H:%M:%S')
+        aux = re.split(r'[TZ.]',self.date_created)
+        self.date_created = datetime.strptime(f'{aux[0]} {aux[1]}', '%Y-%m-%d %H:%M:%S') - timedelta(hours=3)
+        aux = re.split(r'[TZ.]',self.date_modified)
+        self.date_modified = datetime.strptime(f'{aux[0]} {aux[1]}', '%Y-%m-%d %H:%M:%S') - timedelta(hours=3)
+        aux = re.split(r'[TZ.]',self.start)
+        self.start = datetime.strptime(f'{aux[0]} {aux[1]}', '%Y-%m-%d %H:%M:%S')
+        aux = re.split(r'[TZ.]',self.end)
+        self.end = datetime.strptime(f'{aux[0]} {aux[1]}', '%Y-%m-%d %H:%M:%S')
         return None
     
     def get_users(self, objeto_created, objeto_modified):
